@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息索引 · 半岛体育 · 资料整理侧记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fbfbfa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+            color: #1e1e1e;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* 文章头部 */
+        .article-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+
+        .article-header sup {
+            font-size: 0.7rem;
+            color: #aaa;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 550;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin: 0.25rem 0 0.5rem 0;
+            color: #111;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: #6f6f6f;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-meta span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .article-meta span::before {
+            content: "·";
+            margin-right: 0.4rem;
+            color: #ccc;
+        }
+
+        .article-meta span:first-child::before {
+            content: "";
+            margin-right: 0;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: #3a3a3a;
+            margin: 1.8rem 0 2rem 0;
+            padding-left: 0.5rem;
+            border-left: 3px solid #d4d4d4;
+            font-weight: 370;
+            letter-spacing: 0.01em;
+        }
+
+        /* 正文段落 */
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #2c2c2c;
+        }
+
+        .content .section-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 2.2rem 0 0.8rem 0;
+            color: #0f0f0f;
+            letter-spacing: -0.01em;
+        }
+
+        .content .section-title:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        .content blockquote {
+            margin: 1.8rem 0;
+            padding: 1rem 1.5rem;
+            background: #f2f2ef;
+            border-radius: 6px;
+            font-style: normal;
+            color: #2e2e2e;
+            border-left: none;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .content blockquote::before {
+            content: "📎 索引笔记";
+            display: block;
+            font-weight: 460;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+            color: #7f7f7f;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .content blockquote p {
+            margin-bottom: 0.4rem;
+        }
+
+        .content blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .inline-link {
+            color: #1a5a6e;
+            text-decoration: none;
+            border-bottom: 1px solid #cbdbe0;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #1a5a6e;
+            color: #0e3f4f;
+        }
+
+        .divider {
+            margin: 2.8rem 0 2rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+        }
+
+        .visit-note {
+            background: #f5f5f3;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #2b2b2b;
+            margin: 2rem 0 1.5rem 0;
+            border: 1px solid #e7e7e4;
+        }
+
+        .visit-note strong {
+            font-weight: 500;
+        }
+
+        .faq-mini {
+            margin: 2.5rem 0 1rem 0;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #ecece9;
+            padding: 0.8rem 0;
+        }
+
+        .faq-mini details:first-of-type {
+            border-top: 1px solid #ecece9;
+        }
+
+        .faq-mini summary {
+            font-weight: 430;
+            cursor: pointer;
+            color: #1f1f1f;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .faq-mini details p {
+            margin: 0.6rem 0 0.2rem 0.2rem;
+            font-size: 0.9rem;
+            color: #4a4a4a;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #efefec;
+            padding-top: 1.8rem;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 500px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .article-title {
+                font-size: 1.6rem;
+            }
+            .lead {
+                font-size: 1rem;
+                padding-left: 0.4rem;
+            }
+            .content blockquote {
+                padding: 0.8rem 1rem;
+            }
+            .visit-note {
+                padding: 0.9rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <article>
+        <header class="article-header">
+            <sup>资料索引 · 信息整理</sup>
+            <h1 class="article-title">从散落信息到有序参照：半岛体育的资料侧写</h1>
+            <div class="article-meta">
+                <span>整理笔记</span>
+                <span>运动 · 资讯 · 平台</span>
+                <span>约 6 分钟阅读</span>
+            </div>
+        </header>
+
+        <p class="lead">
+            当需要了解一个体育信息集合时，最好的方式不是零散浏览，而是先建立索引框架。本文从资料整理的角度，将围绕<a href="https://ssl-bandaosport.com" class="inline-link">半岛体育</a>所涉及的赛事信息、项目分类及内容脉络进行梳理，形成一份可供参考的结构化笔记。
+        </p>
+
+        <div class="content">
+            <h2 class="section-title">一、信息背景与整理动机</h2>
+            <p>
+                体育领域的资讯平台往往承载大量赛事数据、项目规则和动态更新。在接触<a href="https://ssl-bandaosport.com" class="inline-link">半岛体育</a>的过程中，我发现其内容涵盖面较广，从球类运动到竞技项目均有涉及。如果不做分层整理，很容易在浏览时陷入信息过载。因此，我尝试用分类思维，将主要模块拆解为若干可检索的条目，便于后续快速定位。
+            </p>
+            <p>
+                这次整理不追求面面俱到，而是提炼出最常被查阅的几类信息：赛事日程、项目基础资料、以及社区讨论中频繁出现的术语解释。每一个分类下都保留了原始的出处关联，以保持可溯源性。
+            </p>
+
+            <h2 class="section-title">二、内容结构的三种切片</h2>
+            <p>
+                根据对平台内容的多次抽样，我归纳出三种典型的资料切片。第一种是「时间轴切片」——将赛事按月份排列，形成预览式的日历表，适合规划关注节奏。第二种是「项目对照切片」——针对不同运动项目，提取规则、场地、常用术语等核心字段，方便横向比较。第三种是「语境切片」——收集论坛或问答中提及的高频关键词，并附上简短说明。
+            </p>
+            <p>
+                这三种切片互有重叠，但组合使用能快速搭建起对<a href="https://ssl-bandaosport.com" class="inline-link">半岛体育</a>信息生态的基本认知。我在本地实验中，用电子表格和标签系统分别维护，效果比较直观。
+            </p>
+
+            <blockquote>
+                <p><strong>索引笔记 #3</strong> —— 跨平台资料对照时，发现部分赛事在「半岛体育」的条目下附有官方规则原文链接，这比纯摘要更可靠。建议在整理时优先收录带有原始出处的段落，避免二次转述造成的偏差。</p>
+                <p>另外，关于运动项目的历史沿革，平台内的短文虽然简短，但时间线清楚，适合作为快速参考。</p>
+            </blockquote>
+
+            <h2 class="section-title">三、常见搜索场景与索引建议</h2>
+            <p>
+                假设你需要查找某支球队的近期赛程，或者某个冷门项目的计分方式，直接使用站内搜索往往返回大量结果。我习惯先定位到项目分类页面，再结合筛选条件缩小范围。经过几次尝试，我发现「半岛体育」的层级标签（比如按运动大类、按地区、按赛事级别）设计得比较清晰，用关键词配合标签可以节省很多时间。
+            </p>
+            <p>
+                另一个实用技巧是关注信息更新的时间戳。体育类内容时效性很强，同一篇文章可能在不同日期有修订。在整理资料时，我习惯把最后更新时间记录在索引条目旁，这样后续复查时能快速判断是否仍可引用。
+            </p>
+
+            <div class="visit-note">
+                <strong>✎ 访问参考</strong> — 如果你正在进行体育信息调研或资料归档，可以尝试将 <a href="https://ssl-bandaosport.com" class="inline-link">半岛体育</a> 作为一个信息节点，结合你自己的分类体系进行交叉比对。注意保持记录习惯，每一次浏览都可能产生新的索引线索。
+            </div>
+
+            <h2 class="section-title">四、关于索引边界的思考</h2>
+            <p>
+                任何索引系统都有其范围限制。目前我整理的条目主要集中在中文资料和主流赛事，对于小众项目或地区性联赛的覆盖还不够全面。如果你在浏览<a href="https://ssl-bandaosport.com" class="inline-link">半岛体育</a>时发现未被收录的有价值内容，欢迎自行补充进你的索引框架。整理本身就是一个动态迭代的过程。
+            </p>
+            <p>
+                从个人经验来看，好的索引不在于条目多少，而在于每个条目是否包含准确的上下文。与其追求大而全，不如先把常见问题域梳理清楚，再逐步扩展。
+            </p>
+
+            <div class="faq-mini">
+                <details>
+                    <summary>FAQ 摘录 · 索引时遇到的常见问题</summary>
+                    <p><strong>问</strong>：为什么有些项目在平台内没有单独的规则页面？<br>
+                    <strong>答</strong>：可能是该项目的规则较为统一，平台以通用描述代替了专项页面。建议结合官方体育协会资料进行补充。</p>
+                </details>
+                <details>
+                    <summary>关于赛事日程的更新频率</summary>
+                    <p>一般来说，大型赛事的信息会在赛前两周至一个月内密集更新。日常训练赛或区域性比赛的条目则更新较慢，需要留意页面标注的“上次更新”时间。</p>
+                </details>
+                <details>
+                    <summary>整理时如何避免信息重复</summary>
+                    <p>建立关键词去重表，同一条目尽量只保留一个主要来源。如果发现多个页面描述相似，优先采用信息更完整或标注更清晰的那个。</p>
+                </details>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <p style="font-size:0.9rem; color:#5e5e5e; margin: 1rem 0 0.5rem 0;">
+            ※ 本文为资料整理侧记，内容基于个人浏览与分类实践，不构成平台官方说明。索引框架可自由复制调整。
+        </p>
+
+        <footer class="footer-note">
+            笔记编号 · 2025-04 · 信息索引实验
+        </footer>
+    </article>
+</div>
+</body>
+</html>
